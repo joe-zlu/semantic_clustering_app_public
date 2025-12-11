@@ -100,7 +100,7 @@ The application follows a linear workflow accessible via the sidebar.
 *   **Review**: See which keywords characterize each group.
 
 ### Step 3 Option 1: Document-level Keywords (Optional)
-*   **Analyze**: Score individual documents against their cluster's keywords.
+*   **Analyse**: Score individual documents against their cluster's keywords.
 *   **Filter**: Identify outliers or strongly aligned documents.
 
 ### Step 3 Option 2: Analyse using an LLM - Prompt Generation
