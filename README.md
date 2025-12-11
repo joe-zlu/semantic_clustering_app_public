@@ -124,11 +124,11 @@ The application follows a linear workflow accessible via the sidebar.
 
 ![Step 2: Semantic Clustering - By Tree Cutting](assets/screenshots/step2_tree_cutting.png)
 
-![Step 2: Semantic Clustering - t-SNE plot](assets/screenshots/step2_tsne.png)
+![Step 2: Semantic Clustering - t-SNE plot](assets/screenshots/step2_tsne_plot.png)
 
 ### Step 3 Option 1: Keyword Extraction
 
-![Step 3 Option 1: BERTopic Keyword Extraction](assets/screenshots/step3_keywords_bertopic.png)
+![Step 3 Option 1: BERTopic Keyword Extraction](assets/screenshots/step3_keyword_bertopic.png)
 
 ![Step 3 Option 1: Document Topics 1](assets/screenshots/step3_doc_level1.png)
 
