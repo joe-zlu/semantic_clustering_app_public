@@ -84,7 +84,7 @@ with tab1:
         st.write(f"Available embeddings: {len(st.session_state.embeddings_data)}")
         col1, col2 = st.columns(2)
         with col1:
-            n_clusters = st.slider("Set Target Number of Clusters", 2, min(20, len(st.session_state.embeddings_data)), 5)
+            n_clusters = st.slider("Set Target Number of Clusters", 1, min(100, len(st.session_state.embeddings_data)), 5)
         with col2:
             linkage_method = st.selectbox("Linkage Method", ["ward", "complete", "average", "single"], index=0)
 

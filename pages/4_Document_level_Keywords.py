@@ -169,10 +169,15 @@ else:
                 st.markdown("#### Document-Level Relevance")
                 document_data = []
                 for doc in cluster_data["documents"]:
+                    # Get the original text_id from embeddings_data using document_index
+                    doc_index = doc["document_index"]
+                    original_text_id = st.session_state.embeddings_data[doc_index].get("text_id", f"Index_{doc_index}")
+
                     relevant = [kw for kw in doc["topic_relevance_scores"] if kw["relevance_score"] >= min_relevance_threshold]
                     top_kws = ", ".join([f"{k['keyword']} ({k['relevance_score']:.3f})" for k in relevant[:5]])
                     document_data.append({
                         "Doc ID": doc["document_index"],
+                        "Text ID": original_text_id,
                         "Text Preview": doc["text"][:100] + ("..." if len(doc["text"]) > 100 else ""),
                         "Relevant Keywords (Top 5)": top_kws if relevant else "None above threshold",
                         "Count": len(relevant)
@@ -210,10 +215,15 @@ else:
             export_data = []
             for cid, cdata in relevance_results.items():
                 for doc in cdata["documents"]:
+                    # Get the original text_id from embeddings_data using document_index
+                    doc_index = doc["document_index"]
+                    original_text_id = st.session_state.embeddings_data[doc_index].get("text_id", f"Index_{doc_index}")
+
                     relevant = [kw for kw in doc["topic_relevance_scores"] if kw["relevance_score"] >= min_relevance_threshold]
                     export_data.append({
                         "Cluster ID": cid,
                         "Document ID": doc["document_index"],
+                        "Text ID": original_text_id,
                         "Text": doc["text"],
                         "Relevant Keywords": ", ".join([f"{k['keyword']} ({k['relevance_score']:.3f})" for k in relevant]),
                         "Count": len(relevant),

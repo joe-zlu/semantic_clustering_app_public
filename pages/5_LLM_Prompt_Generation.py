@@ -97,9 +97,7 @@ else:
         with col1_prompt:
             user_prompt = st.text_area(
                 "Part 1 - Analysis Instruction",
-                value="""1. Analyse the texts below and assign relevant key issue tags to each of them.
-2. Propose additional key issue tags for issues not covered in the available set.
-3. Output the results in a structured CSV file (with columns: Text ID, Text, Assigned Key Issue Tags, Additional Suggested Tags, Reasoning) and provide a download link.""",
+                value="""Group the keywords and issues in the texts below into key themes that would be useful to inform a health reform for medicinal cannabis in Australia.""",
                 height=200
             )
         with col2_info:
@@ -109,7 +107,7 @@ else:
         with col1_tags:
             key_issue_tags = st.text_area(
                 "Part 2 - Key Issue Tags (Optional)",
-                value="Other approvals, paediatric use, prescribing, safety reporting, GMP, THC limit, data collection, access for existing patients, Quality requirements, evidence, trial cost, IP protection, equitable access, time limited transition, reporting, access for existing patients, transition, scheduling, loopholes, policy wording, road safety, stigma, support for registration, cost, standards, support for registration, conflict of interest, misuse of SAS, use in pregnancy",
+                value="",
                 placeholder="Enter comma-separated tags. Leave empty if not assigning issue tags.",
                 height=200
             )
@@ -149,7 +147,7 @@ else:
                         full_prompt = user_prompt.strip()
                         if tags_list:
                             full_prompt += f"\n\nAvailable key issue tags: {', '.join(tags_list)}"
-                        full_prompt += f"\n\n# Texts to analyse:\n\n{part3_text}"
+                        full_prompt += f"\n\n **Texts to analyse:**\n\n{part3_text}"
 
                         cluster_prompts.append({
                             "prompt_number": i + 1,

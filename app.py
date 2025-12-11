@@ -22,13 +22,14 @@ This Streamlit application helps to turn unstructured text into structured insig
 
 ## 📌 **Overview of Workflow**
 
-The app is organised into **5 sequential pages** (accessible via the sidebar):
+The app is organised into **6 sequential pages** (accessible via the sidebar):
 
-Step 1. **Data Management** → Upload & generate or load word embeddings  
-Step 2. **Semantic Clustering** → Group similar texts using agglomerative clustering  
-Step 3a Part 1. **Cluster Keyword Extraction** → Extract representative keywords per cluster using BERTopic language processing algorithm  
-Step 3a Part 2. **Document-level Keywords** → Analyse which keywords are most relevant to each document  
-Step 3b. **LLM Prompt Generation** → Auto-generate prompts for LLMs to analyse your clustered data  
+Step 1. **Data Management** → Upload & generate or load word embeddings
+Step 2. **Semantic Clustering** → Group similar texts using agglomerative clustering
+Step 3a Part 1. **Cluster Keyword Extraction** → Extract representative keywords per cluster using BERTopic language processing algorithm
+Step 3a Part 2. **Document-level Keywords** → Analyse which keywords are most relevant to each document
+Step 3b. **LLM Prompt Generation** → Auto-generate prompts for LLMs to analyse your clustered data
+Step 4. **LLM Prompt Execution** → Run generated prompts against local LLM server and collect responses
 
 > ✅ **Tip**: Always proceed in order—each step builds on the previous one.
 
@@ -148,7 +149,7 @@ Choose **one** of two clustering methods:
 
 ---
 
-## 🔹 Step 3 Option B: **LLM Prompt Generation**
+## 🔹 Step 3 Option B Part 1: **LLM Prompt Generation**
 
 ### What it does:
 - Auto-generates ready-to-use prompts for use with Microsoft Copilot to gather additional insights (e.g. cluster summarisation, key issue tagging)
@@ -176,14 +177,56 @@ Choose **one** of two clustering methods:
 
 ---
 
+## 🔹 Step 3 Option B Part 2: **LLM Prompt Execution**
+
+### What it does:
+- Execute generated prompts against a local LLM server using OpenAI-compatible endpoints
+- Collect and display prompt-response pairs for analysis
+- Support both chat completion and completion formats
+- Provide bulk execution capabilities for all prompts
+
+### How to use:
+
+> ⚠️ **You must have generated prompts in Step 3b.**
+
+1. **Configure your LLM server** in the sidebar:
+   - Server URL (default: `http://localhost:8080`)
+   - Optional API key if required
+   - Model name and generation parameters
+
+2. **Select prompts to execute**:
+   - Choose individual prompts from specific clusters
+   - Or select "All" to see all available prompts
+
+3. **Execute prompts**:
+   - Click **▶️ Run** for individual prompts
+   - Use **🚀 Execute All Prompts** for bulk execution
+   - Monitor execution progress and timing
+
+4. **Review responses**:
+   - **Latest Response**: See the most recent prompt-response pair
+   - **All Responses**: Browse all executed prompts with download options
+   - **Execution History**: View summary table of all executions
+
+5. **Export results**:
+   - Download individual prompt-response pairs as JSON
+   - Export all responses as a comprehensive JSON file
+   - Each download includes metadata (model, timing, etc.)
+
+> 💡 Supports both `/v1/chat/completions` and `/v1/completions` endpoints for maximum compatibility with local LLM servers.
+
+---
+
 ## 🛠️ **Tips & Best Practices**
 
 - **Start small**: Test with 20–50 texts before scaling up.
-- **Use consistent Llama.cpp models**: Don’t mix embeddings from different models.
+- **Use consistent Llama.cpp models**: Don't mix embeddings from different models.
 - **Name your files clearly**: Include model name, date, and parameters.
 - **Clusters are not final**: Adjust tree height or cluster count until groups make sense.
 - **Keyword extraction improves with cluster quality**: Refine clustering if keywords seem off-topic.
 - **Always validate LLM outputs**: The app prepares prompts—**you** interpret results.
+- **Monitor execution times**: Large prompts or complex models may take longer to process.
+- **Save responses frequently**: Download important results to avoid data loss.
 
 ---
 
@@ -191,11 +234,14 @@ Choose **one** of two clustering methods:
 
 | Issue | Solution |
 |------|--------|
-| “No embeddings found” | Go back to **Data Management** and upload/generate data |
+| "No embeddings found" | Go back to **Data Management** and upload/generate data |
 | Clustering fails | Ensure ≥2 embeddings; check for `NaN` in text |
 | Keywords seem irrelevant | Try lowering `max_df` or increasing `min_df` |
 | App is slow | Use smaller model (e.g., Gemma 300M) or reduce text length |
 | JSON download fails | Ensure all integers are Python-native (app handles this automatically now) |
+| "No prompts found" | Go to **Step 3b - LLM Prompt Generation** and generate prompts first |
+| LLM server connection fails | Check server URL and ensure llama.cpp server is running with `--chat-format` |
+| Prompt execution times out | Increase timeout or use smaller model/max_tokens setting |
 
     """)
 

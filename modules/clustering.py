@@ -335,7 +335,8 @@ class BERTopicKeywordExtractor:
     def extract_keywords(self,
                         texts: List[str],
                         cluster_labels: np.ndarray,
-                        embeddings: Optional[np.ndarray] = None) -> Dict[int, Dict[str, any]]:
+                        embeddings: Optional[np.ndarray] = None,
+                        text_ids: Optional[List] = None) -> Dict[int, Dict[str, any]]:
         """
         Extract keywords from text clusters using c-TF-IDF
 
@@ -343,6 +344,7 @@ class BERTopicKeywordExtractor:
             texts: List of text documents
             cluster_labels: Cluster labels for each text
             embeddings: Pre-computed embeddings (optional)
+            text_ids: Original text IDs from the input data (optional)
 
         Returns:
             Dictionary with cluster information and keywords
@@ -419,12 +421,14 @@ class BERTopicKeywordExtractor:
                         "score": float(cluster_scores[idx])
                     })
 
-            # Get all texts in this cluster with their original indices
+            # Get all texts in this cluster with their original indices and text IDs
             cluster_texts_info = []
             for doc_idx in cluster_doc_indices:
                 original_idx = valid_indices[doc_idx]  # Map back to original indices
+                # Use original text_id if provided, otherwise use array index
+                original_text_id = text_ids[original_idx] if text_ids else original_idx
                 cluster_texts_info.append({
-                    "text_id": original_idx,
+                    "text_id": original_text_id,
                     "text": texts[original_idx]
                 })
 

@@ -9,4 +9,5 @@ def Navbar():
         st.page_link('pages/2_Semantic_Clustering.py', label='Step 2 - Semantic Clustering')
         st.page_link('pages/3_Cluster_Keyword_Extraction.py', label='Step 3a1 - Cluster Keyword Extraction')
         st.page_link('pages/4_Document_level_Keywords.py', label='Step 3a2 - Document-level Keywords')
-        st.page_link('pages/5_LLM_Prompt_Generation.py', label='Step 3b - LLM Prompt Generation')
+        st.page_link('pages/5_LLM_Prompt_Generation.py', label='Step 3b1 - LLM Prompt Generation')
+        st.page_link('pages/6_LLM_Prompt_Execution.py', label='Step 3b2 - LLM Prompt Execution')

@@ -76,6 +76,7 @@ else:
             texts = [item["text"] for item in st.session_state.embeddings_data]
             cluster_labels = np.array([item.get("cluster", -1) for item in st.session_state.embeddings_data])
             embeddings = np.array([item["embedding"] for item in st.session_state.embeddings_data])
+            text_ids = [item.get("text_id", f"Index_{i}") for i, item in enumerate(st.session_state.embeddings_data)]
 
             extractor = BERTopicKeywordExtractor(
                 top_n_words=top_n_words,
@@ -88,7 +89,8 @@ else:
                 results = extractor.extract_keywords(
                     texts=texts,
                     cluster_labels=cluster_labels,
-                    embeddings=embeddings
+                    embeddings=embeddings,
+                    text_ids=text_ids
                 )
 
             st.session_state.bertopic_results = results
@@ -136,6 +138,7 @@ else:
                     table_data.append({
                         "Cluster ID": cluster_id,
                         "Document ID": text_info["text_id"],
+                        "Text ID": text_info.get("text_id", text_info["text_id"]),
                         "Text": text_info["text"],
                         "Extracted Keywords": keywords_str
                     })
@@ -171,6 +174,7 @@ else:
                 table_data_export.append({
                     "Cluster ID": int(row["Cluster ID"]),
                     "Document ID": int(row["Document ID"]),
+                    "Text ID": row["Text ID"],
                     "Text": row["Text"],
                     "Extracted Keywords": row["Extracted Keywords"]
                 })

@@ -52,19 +52,20 @@ with st.sidebar:
     st.page_link('pages/2_Semantic_Clustering.py', label='Step 2 - Semantic Clustering')
     st.page_link('pages/3_Cluster_Keyword_Extraction.py', label='Step 3a1 - Cluster Keyword Extraction')
     st.page_link('pages/4_Document_level_Keywords.py', label='Step 3a2 - Document-level Keywords')
-    st.page_link('pages/5_LLM_Prompt_Generation.py', label='Step 3b - LLM Prompt Generation')
+    st.page_link('pages/5_LLM_Prompt_Generation.py', label='Step 3b1 - LLM Prompt Generation')
+    st.page_link('pages/6_LLM_Prompt_Execution.py', label='Step 3b2 - LLM Prompt Execution')
 
     st.markdown("---")
 
     st.header("Configuration")
     llama_server_url = st.text_input(
         "Llama.cpp Word Embedding Model URL",
-        value="http://evlchdprs02.edw.health:8889/"
+        value="http://evlchdprs02.edw.health:8870/"
     )
     st.info("""
-            Med quality/fast embeddings (Gemma 300M Model) - http://evlchdprs02.edw.health:8889/  
-            Med quality/fast embeddings (Qwen3 600M Model) - http://evlchdprs02.edw.health:8890/  
-            High quality/slow embeddings (Qwen3 4B Model) - http://evlchdprs02.edw.health:8891/  
+            Med quality/fast embeddings (Gemma 300M Model) - http://evlchdprs02.edw.health:8870/  
+            Med quality/fast embeddings (Qwen3 600M Model) - http://evlchdprs02.edw.health:8871/  
+            High quality/slow embeddings (Qwen3 4B Model) - http://evlchdprs02.edw.health:8872/  
             For benchmarks - https://huggingface.co/spaces/mteb/leaderboard
             """)
     
@@ -241,9 +242,9 @@ if st.session_state.embeddings_data:
             os.makedirs(save_dir, exist_ok=True)
             port = urlparse(llama_server_url).port
             model_name = {
-                8889: "Gemma300M",
-                8890: "Qwen3_600M",
-                8891: "Qwen3_4B"
+                8870: "Gemma300M",
+                8871: "Qwen3_600M",
+                8872: "Qwen3_4B"
             }.get(port, "unknown_model")
             filename = f"{custom_filename}_{model_name}.json"
             file_path = os.path.join(save_dir, filename)
