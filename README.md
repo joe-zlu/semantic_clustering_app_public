@@ -134,13 +134,13 @@ The application follows a linear workflow accessible via the sidebar.
 
 ![Step 3 Option 1: Document Topics 2](assets/screenshots/step3_doc_level2.png)
 
-### Step 3 Option 2: Analyse using an LLM - Prompt Generation
+### Step 3 Option 2: Analyse text clusters using an LLM - Prompt Generation
 
 ![Step 3 Option 2: Analyse using an LLM - Prompt Generation 1](assets/screenshots/step3_prompt_gen1.png)
 
 ![Step 3 Option 2: Analyse using an LLM - Prompt Generation 2](assets/screenshots/step3_prompt_gen2.png)
 
-### Step 3 Option 2: Analyse using an LLM - Prompt Execution
+### Step 3 Option 2: Analyse text clusters using an LLM - Prompt Execution
 
 ![Step 3 Option 2: Analyse using an LLM - Prompt Execution 1](assets/screenshots/step3_prompt_exec1.png)
 
