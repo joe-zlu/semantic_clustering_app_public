@@ -75,7 +75,7 @@ st.set_page_config(
 )
 
 st.title("🧩 LLM Prompt Generation")
-st.markdown("Construct prompts programmatically for LLM analysis of clustered texts. Generate prompts to analyze texts and assign relevant key issue tags.")
+st.markdown("Construct prompts programmatically for LLM analysis of clustered texts. Generate prompts to analyse texts and assign relevant key issue tags.")
 
 # Validation
 if not st.session_state.embeddings_data:
@@ -97,11 +97,11 @@ else:
         with col1_prompt:
             user_prompt = st.text_area(
                 "Part 1 - Analysis Instruction",
-                value="""Group the keywords and issues in the texts below into key themes that would be useful to inform a health reform for medicinal cannabis in Australia.""",
+                value="""Summarise the texts below and identify key themes. Return the themes as a list of bullet points.""",
                 height=200
             )
         with col2_info:
-            st.info("💡 Customize the instruction based on what you want the LLM to do.")
+            st.info("💡 Customise the instruction based on what you want the LLM to do.")
 
         col1_tags, col2_info = st.columns([0.7, 0.3])
         with col1_tags:
@@ -120,7 +120,7 @@ else:
                 "Maximum Words per Prompt (Part 3)",
                 min_value=500,
                 max_value=10000,
-                value=2000,
+                value=1000,
                 step=500
             )
         with col2_info:

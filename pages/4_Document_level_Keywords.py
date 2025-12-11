@@ -48,7 +48,7 @@ st.set_page_config(
 
 st.title("🧩 Document-level Keywords")
 st.header("Document-Topic Relevance Analysis")
-st.markdown("This page analyzes which keywords/topics from each cluster are most relevant to individual documents within that cluster.")
+st.markdown("This page analyses which keywords/topics from each cluster are most relevant to individual documents within that cluster.")
 
 # Validation
 if not st.session_state.embeddings_data:
@@ -93,7 +93,7 @@ else:
             keywords = [kw["word"] for kw in cluster_data["keywords"]]
             topic_keywords[cluster_id] = keywords
 
-        if st.button("Analyze Document-Topic Relevance", type="primary"):
+        if st.button("Analyse Document-Topic Relevance", type="primary"):
             texts = [item["text"] for item in st.session_state.embeddings_data]
             cluster_labels = np.array([item.get("cluster", -1) for item in st.session_state.embeddings_data])
 
@@ -112,7 +112,7 @@ else:
             st.session_state.current_relevance_method = relevance_method
 
             if relevance_results:
-                st.success(f"Analyzed relevance for {len(relevance_results)} clusters!")
+                st.success(f"Analysed relevance for {len(relevance_results)} clusters!")
             else:
                 st.error("No results generated. Check clustering and keyword extraction.")
 

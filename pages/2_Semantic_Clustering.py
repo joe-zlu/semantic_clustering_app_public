@@ -244,7 +244,7 @@ with tab2:
 
         # Visualization & export (same as Tab 3 but with tree-specific filename)
         if hasattr(st.session_state, 'cluster_labels'):
-            st.subheader("Visualize Hierarchical Clusters by Tree Cutting")
+            st.subheader("Visualise Hierarchical Clusters by Tree Cutting")
             viz_method = st.selectbox("Select Visualisation Method", ["t-SNE", "PCA"], key="tree_cutting_viz")
             embeddings_list = [item["embedding"] for item in st.session_state.embeddings_data]
             texts = [item["text"] for item in st.session_state.embeddings_data]

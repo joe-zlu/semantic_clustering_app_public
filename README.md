@@ -2,7 +2,7 @@
 
 This Streamlit application extracts insights from unstructured text. It leverages word embeddings, semantic clustering (using reproducible Agglomerative methods), and BERTopic-style keyword extraction to help analyse and categorise large text datasets.
 
-The application is designed to work with a local **Llama.cpp** server for privacy-preserving, offline-capable embedding generation and prompt execution.
+The application is designed to work with a local Large Language Model (LLM) hosted using **Llama.cpp** server for privacy-preserving, offline-capable word embedding generation and prompt execution.
 
 ## Features
 
@@ -11,7 +11,7 @@ The application is designed to work with a local **Llama.cpp** server for privac
 *   **Keyword Extraction**: Extract representative keywords for each cluster using BERTopic-style c-TF-IDF.
 *   **Document Analysis**: Score document relevance to cluster keywords.
 *   **LLM Prompt Generation**: Generate prompts for user to paste into LLMs (like Microsoft Copilot) for cluster summarisation and insight generation.
-*   **LLM Prompt Execution**: Execute the generated prompts locally using any open-weight LLM hosted via Llama.cpp’s llama-server application.
+*   **LLM Prompt Execution**: Execute the generated prompts locally using any open-weight LLM hosted via Llama.cpp’s llama-server.
 
 ---
 
@@ -23,7 +23,7 @@ Ensure you have the following installed:
 
 *   **uv** (Python Package Manager):
     *   MacOS/Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-*   **Llama.cpp**: You need the `llama-server` application to serve the open-weight embedding and language models. More information can be found here: https://github.com/ggml-org/llama.cpp
+*   **Llama.cpp**: You need the `llama-server` application to serve the open-weight word embedding and language models. More information can be found here: https://github.com/ggml-org/llama.cpp
     *   [Download pre-built binaries](https://github.com/ggml-org/llama.cpp/releases) or build from source.
 
 ### 2. Installation
@@ -46,7 +46,7 @@ The application requires running Llama.cpp servers. You may need two different m
 2.  **LLM (Chat Model)**: For executing analysis prompts (Step 3 Option 2).
 
 #### A. Deploying the Embedding Model (Required for Step 1)
-Download a dedicated embedding model (e.g., `nomic-embed-text-v1.5.Q4_K_M.gguf`) or a model that supports embeddings.
+Download a dedicated word embedding model that is supported by Llama.cpp (i.e. model in GGUF format). You can find open-weight models on Huggingface (https://huggingface.co/models). The example below uses Google's Gemma 300 million parameter word embedding model (https://huggingface.co/google/embeddinggemma-300m).
 
 ```bash
 # Run on port 8889 (Default in app)
@@ -55,8 +55,8 @@ Download a dedicated embedding model (e.g., `nomic-embed-text-v1.5.Q4_K_M.gguf`)
 *   `--embedding`: **Critical** flag to enable the embedding endpoint.
 *   `--ctx-size`: Ensure this is larger than your longest text chunk.
 
-#### B. Deploying the LLM for Prompts (Required for Step 3 Option 2)
-Download a chat/instruct model (e.g., `Meta-Llama-3-8B-Instruct.Q4_K_M.gguf`, `Qwen2.5-7B-Instruct.gguf`).
+#### B. Deploying the LLM for Prompt Execution (Required for Step 3 Option 2)
+Download an open-weight LLM. (e.g. IBM's Granite 4.0 H-Tiny https://huggingface.co/ibm-granite/granite-4.0-h-tiny).
 
 ```bash
 # Run on a different port (e.g., 8888) to keep both active
@@ -116,20 +116,32 @@ The application follows a linear workflow accessible via the sidebar.
 
 ### Step 1: Data Management
 
-![Step 1: Data Management](screenshots/step_1_data_management.png)
+![Step 1: Data Management](assets/screenshots/step1.png)
 
 ### Step 2: Semantic Clustering
 
-![Step 2: Semantic Clustering](screenshots/step_2_semantic_clustering.png)
+![Step 2: Semantic Clustering - By Number of Clusters](assets/screenshots/step2_num_clusters.png)
+
+![Step 2: Semantic Clustering - By Tree Cutting](assets/screenshots/step2_tree_cutting.png)
+
+![Step 2: Semantic Clustering - t-SNE plot](assets/screenshots/step2_tsne.png)
 
 ### Step 3 Option 1: Keyword Extraction
 
-![Step 3 Option 1: Keyword Extraction](screenshots/step_3_option_1_keyword_extraction.png)
+![Step 3 Option 1: BERTopic Keyword Extraction](assets/screenshots/step3_keywords_bertopic.png)
+
+![Step 3 Option 1: Document Topics 1](assets/screenshots/step3_doc_level1.png)
+
+![Step 3 Option 1: Document Topics 2](assets/screenshots/step3_doc_level2.png)
 
 ### Step 3 Option 2: Analyse using an LLM - Prompt Generation
 
-![Step 3 Option 2: Analyse using an LLM - Prompt Generation](screenshots/step_3_option_2_analyse_using_an_llm_prompt_generation.png)
+![Step 3 Option 2: Analyse using an LLM - Prompt Generation 1](assets/screenshots/step3_prompt_gen1.png)
+
+![Step 3 Option 2: Analyse using an LLM - Prompt Generation 2](assets/screenshots/step3_prompt_gen2.png)
 
 ### Step 3 Option 2: Analyse using an LLM - Prompt Execution
 
-![Step 3 Option 2: Analyse using an LLM - Prompt Execution](screenshots/step_3_option_2_analyse_using_an_llm_prompt_execution.png)
+![Step 3 Option 2: Analyse using an LLM - Prompt Execution 1](assets/screenshots/step3_prompt_exec1.png)
+
+![Step 3 Option 2: Analyse using an LLM - Prompt Execution 2](assets/screenshots/step3_prompt_exec2.png)
