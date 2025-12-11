@@ -3,7 +3,7 @@ import streamlit as st
 def Navbar():
     # Sidebar config (repeated for usability per page)
     with st.sidebar:
-        st.header("Navigation")
+        st.header("🔰 Navigation")
         st.page_link('app.py', label='Home')
         st.page_link('pages/1_Data_Management.py', label='Step 1 - Generate & Load Embeddings')
         st.page_link('pages/2_Semantic_Clustering.py', label='Step 2 - Semantic Clustering')

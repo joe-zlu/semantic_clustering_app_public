@@ -46,7 +46,7 @@ def count_words(text):
 
 # Sidebar config (repeated for usability per page)
 with st.sidebar:
-    st.header("Navigation")
+    st.header("🔰 Navigation")
     st.page_link('app.py', label='Home')
     st.page_link('pages/1_Data_Management.py', label='Step 1 - Generate & Load Embeddings')
     st.page_link('pages/2_Semantic_Clustering.py', label='Step 2 - Semantic Clustering')
@@ -60,12 +60,9 @@ with st.sidebar:
     st.header("Configuration")
     llama_server_url = st.text_input(
         "Llama.cpp Word Embedding Model URL",
-        value="http://evlchdprs02.edw.health:8870/"
+        value="http://localhost:8889/"
     )
-    st.info("""
-            Med quality/fast embeddings (Gemma 300M Model) - http://evlchdprs02.edw.health:8870/  
-            Med quality/fast embeddings (Qwen3 600M Model) - http://evlchdprs02.edw.health:8871/  
-            High quality/slow embeddings (Qwen3 4B Model) - http://evlchdprs02.edw.health:8872/  
+    st.info(""" 
             For benchmarks - https://huggingface.co/spaces/mteb/leaderboard
             """)
     
@@ -84,7 +81,7 @@ st.session_state.llama_server_url = llama_server_url
 st.header("Option 1 - Upload a CSV File Containing Texts & Generate Embeddings")
 
 uploaded_file = st.file_uploader(
-    "Upload a CSV file containing text chunks", 
+    "Upload a CSV file containing text chunks for analysis (columns: text_id and text)", 
     type=["csv"],
     help="CSV file should contain a column with text chunks for embedding generation"
 )

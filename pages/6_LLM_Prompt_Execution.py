@@ -26,7 +26,7 @@ if 'expand_all_clusters' not in st.session_state:
 class OpenAICompatibleClient:
     """Client for communicating with OpenAI-compatible endpoints (like llama.cpp server)"""
 
-    def __init__(self, base_url: str = "http://evlchdpeg01.edw.health:8888", api_key: Optional[str] = None):
+    def __init__(self, base_url: str = "http://localhost:8888", api_key: Optional[str] = None):
         self.base_url = base_url.rstrip('/')
         self.api_key = api_key or "dummy-key"  # OpenAI client requires a key
         self.client = OpenAI(
@@ -257,8 +257,8 @@ def main():
 
     # Server configuration
     server_url = st.sidebar.text_input(
-        "LLM Server URL (default: GPT-OSS-20B)",
-        value="http://evlchdpeg01.edw.health:8888",
+        "Llama.cpp local LLM URL",
+        value="http://localhost:8888",
         help="Base URL of your llama.cpp server or other OpenAI-compatible endpoint"
     )
 
